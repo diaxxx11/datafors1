@@ -1,14 +1,16 @@
 import Papa from "papaparse"
 
-export const parseCSV = async () => {
+export async function parseCSV() {
+  const res = await fetch("/data.csv")
+  const text = await res.text()
 
-  const response = await fetch("/data.csv")
-  const text = await response.text()
-
-  const result = Papa.parse(text, {
-    header: true,
-    skipEmptyLines: true
+  return new Promise((resolve) => {
+    Papa.parse(text, {
+      header: true,
+      skipEmptyLines: true,
+      complete: (results) => {
+        resolve(results.data)
+      },
+    })
   })
-
-  return result.data
 }

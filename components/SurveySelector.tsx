@@ -1,32 +1,24 @@
-"use client"
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-
-interface Props {
+type Props = {
   surveys: string[]
-  onChange: (value: string) => void
+  onChange: (id: string) => void
 }
 
 export default function SurveySelector({ surveys, onChange }: Props) {
   return (
-    <Select onValueChange={onChange}>
-      <SelectTrigger className="w-[240px]">
-        <SelectValue placeholder="Select Survey" />
-      </SelectTrigger>
+    <select
+      className="border p-2 rounded"
+      onChange={(e) => {
+        console.log("dropdown value:", e.target.value)
+        onChange(e.target.value)
+      }}
+    >
+      <option value="">All Surveys</option>
 
-      <SelectContent>
-        {surveys.map((survey) => (
-          <SelectItem key={survey} value={survey}>
-            Survey {survey}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+      {surveys.map((id) => (
+        <option key={id} value={id}>
+          {id}
+        </option>
+      ))}
+    </select>
   )
 }

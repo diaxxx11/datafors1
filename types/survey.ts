@@ -1,11 +1,7 @@
-export interface SurveyRow {
+export type SurveyRow = {
     survey_id: string
-    sentiment: string
-    score: number
     display_label: string
-    display_note: string
-    severity: number
-    confidence: number
-    themes: string
-    should_display: string
+    score: number
+    sentiment: string
+    response: string
   }
